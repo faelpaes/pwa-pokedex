@@ -4,7 +4,7 @@ export default function PokeCard({ pokeData }) {
   const { number, name, type, sprite } = pokeData
   return (
     <figure
-      class="border-water flex h-36 w-28 flex-col overflow-hidden rounded-lg border"
+      class="flex h-36 w-28 flex-col overflow-hidden rounded-lg border border-water"
       style={`border-color: ${colors[type]}`}
     >
       <span
