@@ -12,7 +12,7 @@ class Home extends Nullstack {
   }
 
   async hydrate({ _db }) {
-    this.pokeList = await _db.pokemon.toArray()
+    this.pokeList = await _db.pokemon.orderBy('number').toArray()
   }
 
   renderHeader() {
@@ -39,11 +39,16 @@ class Home extends Nullstack {
     )
   }
 
+  async onFavItem({ _db, number }) {
+    const task = await _db.pokemon.get({ number: number })
+    console.log(`Pokemon ${number}`)
+  }
+
   renderPokeList() {
     return (
       <div class="flex flex-wrap justify-between gap-2">
         {this.pokeList.map((pokeData) => (
-          <PokeCard pokeData={pokeData} />
+          <PokeCard pokeData={pokeData} onFavItem={this.onFavItem} />
         ))}
       </div>
     )

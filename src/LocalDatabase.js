@@ -8,7 +8,7 @@ class LocalDatabase extends Nullstack {
     const pokeList = []
 
     db.version(1).stores({
-      pokemon: '++id, number, name, sprite, type',
+      pokemon: '++id, number, name, sprite, type, is_favorite',
     })
 
     this.pokeList = await this.loadPokeData()
@@ -20,6 +20,7 @@ class LocalDatabase extends Nullstack {
             name: poke.item.name,
             sprite: poke.item.sprite,
             type: poke.item.type,
+            is_favorite: false,
           },
         ])
       })
@@ -38,6 +39,7 @@ class LocalDatabase extends Nullstack {
       data.name,
       `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeNumber}.png`,
       data.types[0].type.name,
+      false,
     )
 
     return {

@@ -1,18 +1,32 @@
 import { colors } from '../constants/color'
+import FavIcon from '../icons/FavIcon'
 
-export default function PokeCard({ pokeData }) {
-  const { number, name, type, sprite } = pokeData
+export default function PokeCard({ pokeData, onFavItem }) {
+  const { number, name, type, sprite, is_favorite } = pokeData
+  let todoInput = null
+
+  if (is_favorite) {
+    todoInput = '<input type="checkbox" checked />'
+  } else {
+    todoInput = <FavIcon />
+  }
+
   return (
     <figure
       class="flex h-36 w-28 flex-col overflow-hidden rounded-lg border border-water"
       style={`border-color: ${colors[type]}`}
     >
-      <span
-        class="w-full p-2 text-right text-xs"
+      <div
+        class="flex w-full flex-row gap-8 p-2 text-xs"
         style={`color: ${colors[type]}`}
       >
-        #{String(number).padStart(3, '0')}
-      </span>
+        <span class="h-1 cursor-pointer" onclick={() => onFavItem({ number })}>
+          {/* <FavIcon /> */}
+          {todoInput}
+        </span>
+
+        <span>#{String(number).padStart(3, '0')}</span>
+      </div>
       <img
         src={sprite}
         alt=""
