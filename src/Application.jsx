@@ -1,5 +1,6 @@
 import Nullstack from 'nullstack'
 import Home from './Home'
+import Offline from './Offline'
 
 import '../tailwind.css'
 
