@@ -21,12 +21,18 @@ class Application extends Nullstack {
     )
   }
 
-  render() {
+  render({ worker }) {
     return (
-      <body class="bg-white font-poppins text-darkgray">
-        <Head />
-        <Home route="/" persistent />
-      </body>
+      <main data-loading={worker.fetching}>
+        {worker.responsive ? (
+          <body class="bg-white font-poppins text-darkgray">
+            <Head />
+            <Home route="/" persistent />
+          </body>
+        ) : (
+          <Offline route="*" />
+        )}
+      </main>
     )
   }
 }
