@@ -1,14 +1,15 @@
 import { colors } from '../constants/color'
 import FavIcon from '../icons/FavIcon'
+import FavIconFilled from '../icons/FavIconFilled'
 
 export default function PokeCard({ pokeData, onFavItem }) {
   const { number, name, type, sprite, is_favorite } = pokeData
-  let todoInput = null
+  let favInput = null
 
   if (is_favorite) {
-    todoInput = '<input type="checkbox" checked />'
+    favInput = <FavIconFilled />
   } else {
-    todoInput = <FavIcon />
+    favInput = <FavIcon />
   }
 
   return (
@@ -21,8 +22,7 @@ export default function PokeCard({ pokeData, onFavItem }) {
         style={`color: ${colors[type]}`}
       >
         <span class="h-1 cursor-pointer" onclick={() => onFavItem({ number })}>
-          {/* <FavIcon /> */}
-          {todoInput}
+          {favInput}
         </span>
 
         <span>#{String(number).padStart(3, '0')}</span>

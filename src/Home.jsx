@@ -40,7 +40,12 @@ class Home extends Nullstack {
   }
 
   async onFavItem({ _db, number }) {
-    const task = await _db.pokemon.get({ number: number })
+    const poke = await _db.pokemon.get({ number: number })
+    poke.is_favorite = !poke.is_favorite
+
+    await _db.pokemon.put(poke)
+    this.pokeList = await _db.pokemon.orderBy('number').toArray()
+
     console.log(`Pokemon ${number}`)
   }
 
